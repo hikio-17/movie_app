@@ -1,11 +1,9 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import HomeStackNavigation from '../navigations/HomeStackNavigation';
 
 const Home = (): JSX.Element => {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <HomeStackNavigation />
   )
 }
 
