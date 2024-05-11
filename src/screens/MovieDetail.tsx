@@ -1,25 +1,20 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { Button, StyleSheet, Text, View } from "react-native";
+import React from 'react'
+import { Text, View } from 'react-native'
 
-const MovieDetail = ({ navigation }: any): JSX.Element => {
-   return (
-     <View style={styles.container}>
-       <Text>Detail Movie</Text>
-       <Button
-         title='Ke Home'
-         onPress={() => {navigation.navigate('HomeScreen')}}
-       />
-     </View>
-   )
- }
+const MovieDetail = ({ route }: any): JSX.Element => {
+  const { id } = route.params
 
- const styles = StyleSheet.create({
-   container: {
-     flex: 1,
-     flexDirection: 'column',
-     justifyContent: 'center',
-     alignItems: 'center'
-   }
- })
+  return (
+    <View
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: 32,
+      }}
+    >
+      <Text style={{ fontSize: 30 }}>Movie ID: {id}</Text>
+    </View>
+  )
+}
 
- export default MovieDetail;
+export default MovieDetail
