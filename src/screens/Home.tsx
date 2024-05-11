@@ -1,5 +1,5 @@
-import React from 'react'
-import HomeStackNavigation from '../navigations/HomeStackNavigation';
+/* eslint-disable react/react-in-jsx-scope */
+import HomeStackNavigation from "../navigations/HomeStackNavigation"
 
 const Home = (): JSX.Element => {
   return (
@@ -7,4 +7,4 @@ const Home = (): JSX.Element => {
   )
 }
 
-export default Home
+export default Home;
