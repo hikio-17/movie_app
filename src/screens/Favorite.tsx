@@ -2,17 +2,20 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
-import { FlatList, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
 import type { Movie } from '../types/app';
 import MovieItem from '../components/movies/MovieItem';
+import { useIsFocused } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MovieDetail from './MovieDetail';
 
 const Favorite = (): JSX.Element => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const isFocused = useIsFocused();
 
   const getFavoriteMovies = async (): Promise<void> => {
     try {
       const initalData: string | null = await AsyncStorage.getItem('@FavoriteList');
-      console.log('Data Storage', initalData);
 
       let favMovieList: Movie[] = [];
 
@@ -26,12 +29,14 @@ const Favorite = (): JSX.Element => {
   }
 
   useEffect(() => {
-    getFavoriteMovies();
-  }, [movies]);
+    if (isFocused) {
+      getFavoriteMovies();
+    }
+  }, [isFocused]);
 
   const renderItem = ({ item }: any): JSX.Element => {
     return (
-      <TouchableOpacity style={{ padding: 10 }}>
+      <TouchableOpacity style={{ padding: 5 }}>
           <MovieItem 
           movie={item}
           size={styles.poster}
@@ -41,16 +46,27 @@ const Favorite = (): JSX.Element => {
     )
   }
 
+  const FavoriteScreen = (): JSX.Element => {
+    return (
+      <View>
+        <FlatList
+          style={{ padding: 10 }}
+          data={movies}
+          numColumns={3}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+     </View>
+    )
+  }
+
+  const Stack = createNativeStackNavigator();
+
   return (
-    <ScrollView>
-      <FlatList
-      style={{ padding: 20 }}
-        data={movies}
-        numColumns={3}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </ScrollView>
+    <Stack.Navigator initialRouteName='FavoriteScreen'>
+      <Stack.Screen name='FavoriteScreen' component={FavoriteScreen} />
+      <Stack.Screen name='MovieDetail' component={MovieDetail} />
+    </Stack.Navigator>
   )
 }
 
