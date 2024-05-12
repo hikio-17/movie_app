@@ -10,7 +10,7 @@ const HomeStackNavigation = (): JSX.Element => {
       <Stack.Navigator>
          <Stack.Screen name='HomeScreen' component={HomeScreen} />
          <Stack.Screen name="MovieDetail" component={MovieDetail} />
-    </Stack.Navigator>
+      </Stack.Navigator>
    )
 }
 
