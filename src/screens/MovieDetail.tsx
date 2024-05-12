@@ -19,8 +19,6 @@ const MovieDetail = ({ route }: any): JSX.Element => {
   const addFavorite = async (movie: Movie): Promise<void> => {
     try {
       const initalData: string | null = await AsyncStorage.getItem('@FavoriteList');
-      console.log('Data Storage', initalData);
-
       let favMovieList: Movie[] = [];
 
       if (initalData !== null) {
@@ -38,8 +36,6 @@ const MovieDetail = ({ route }: any): JSX.Element => {
   const removeFavorite = async (id: number): Promise<void> =>{ 
     try {
       const initialData: string | null = await AsyncStorage.getItem('@FavoriteList');
-      console.log(initialData);
-
       let favMovieList: Movie[] = [];
 
       if (initialData !== null) {
@@ -59,8 +55,6 @@ const MovieDetail = ({ route }: any): JSX.Element => {
 
   const checkIsFavorite = async (id: number): Promise<void> => {
     const initialData: string | null = await AsyncStorage.getItem('@FavoriteList');
-      console.log(initialData);
-
       let favMovieList: Movie[] = [];
 
       if (initialData !== null) {

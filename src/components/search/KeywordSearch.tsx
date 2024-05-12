@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable react/jsx-key */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -19,7 +20,6 @@ const KeywordSearch = (): JSX.Element => {
 
          const responseJson = await response.json();
          setMovies(responseJson.results);
-         console.log(movies);
          setKeyword('');
       } catch (error) {
          console.log(error)
@@ -28,39 +28,40 @@ const KeywordSearch = (): JSX.Element => {
 
    return (
       <View>
-         <View style={styles.container}>
-            <TextInput
-               value={keyword}
-               onChangeText={setKeyword}
-               defaultValue={keyword}
-               style={styles.input}
-               placeholder='Input title movie there'
-               onSubmitEditing={() => {getMovies()}}
-            />
-            <FontAwesome name='search' size={16} />
-         </View>
-         <FlatList
-            data={movies}
-            numColumns={3}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-               <View style={{ padding: 10 }}>
-                  <MovieItem
-                     movie={item}
-                     coverType='poster'
-                     size={styles.poster}
-                  />
-               </View>
-            )}
+      <View style={styles.container}>
+         <TextInput
+            value={keyword}
+            onChangeText={setKeyword}
+            defaultValue={keyword}
+            style={styles.input}
+            placeholder='Input title movie there'
+            onSubmitEditing={() => {getMovies()}}
          />
+         <FontAwesome name='search' size={16} />
       </View>
+      <FlatList
+         style={{ marginTop: 10 }}
+         data={movies}
+         numColumns={3}
+         keyExtractor={(item) => item.id.toString()}
+         renderItem={({ item }) => (
+            <View style={{ padding: 5 }}>
+               <MovieItem
+                  movie={item}
+                  coverType='poster'
+                  size={styles.poster}
+               />
+            </View>
+         )}
+      />
+   </View>
    )
 }
 
 const styles = StyleSheet.create({
    container: {
       marginTop: 10,
-      padding: 16,
+      padding: 10,
       backgroundColor: 'lightgray',
       borderRadius: 50,
       flexDirection: 'row',

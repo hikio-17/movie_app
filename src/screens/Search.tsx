@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import KeywordSearch from '../components/search/KeywordSearch'
 import CategorySearch from '../components/search/CategorySearch'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import MovieDetail from './MovieDetail'
 
 const Search = (): JSX.Element => {
   const [selectedBar, setSelectedBar] = useState<string>('keyword')
 
-  return (
+  const SearchScreen = (): JSX.Element => {
+    return (
     <View style={styles.container}>
       <View>
         <View style={styles.topBarContainer}>
@@ -33,12 +36,21 @@ const Search = (): JSX.Element => {
         {selectedBar === 'keyword' ? <KeywordSearch /> : <CategorySearch />}
       </View>
     </View>
+  )}
+
+  const Stack = createNativeStackNavigator();
+
+  return (
+    <Stack.Navigator initialRouteName='SearchScreen'>
+      <Stack.Screen name='SearchScreen' component={SearchScreen} />
+      <Stack.Screen name='MovieDetail' component={MovieDetail} />
+    </Stack.Navigator>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: 10,
   },
   topBarContainer: {
     display: 'flex',
