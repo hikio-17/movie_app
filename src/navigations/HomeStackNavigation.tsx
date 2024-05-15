@@ -8,8 +8,20 @@ const Stack = createNativeStackNavigator();
 const HomeStackNavigation = (): JSX.Element => {
    return (
       <Stack.Navigator>
-         <Stack.Screen name='HomeScreen' component={HomeScreen} />
-         <Stack.Screen name="MovieDetail" component={MovieDetail} />
+         <Stack.Screen 
+            name='HomeScreen' 
+            component={HomeScreen}
+            options={{ 
+               title: 'Home'
+             }}
+         />
+         <Stack.Screen 
+            name="MovieDetail" 
+            component={MovieDetail}
+            options={{ 
+               title: 'Movie Detail'
+             }}
+         />
       </Stack.Navigator>
    )
 }

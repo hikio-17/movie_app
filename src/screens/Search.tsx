@@ -42,7 +42,13 @@ const Search = (): JSX.Element => {
 
   return (
     <Stack.Navigator initialRouteName='SearchScreen'>
-      <Stack.Screen name='SearchScreen' component={SearchScreen} />
+      <Stack.Screen 
+        name='SearchScreen' 
+        component={SearchScreen}
+        options={{ 
+          title: 'Search'
+         }}
+      />
       <Stack.Screen name='MovieDetail' component={MovieDetail} />
     </Stack.Navigator>
   )

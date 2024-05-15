@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
 import type { Movie } from '../types/app';
 import MovieItem from '../components/movies/MovieItem';
-import { useIsFocused } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MovieDetail from './MovieDetail';
 
@@ -46,7 +46,15 @@ const Favorite = (): JSX.Element => {
     )
   }
 
-  const FavoriteScreen = (): JSX.Element => {
+  const FavoriteScreen = ({ navigation }: any): JSX.Element => {
+    useFocusEffect(() => {
+      const unsubscribe = navigation.addListener('beforeRemove', () => {
+        navigation.replace('FavoriteScreen');
+      });
+
+      return unsubscribe;
+    });
+
     return (
       <View>
         <FlatList
@@ -64,8 +72,20 @@ const Favorite = (): JSX.Element => {
 
   return (
     <Stack.Navigator initialRouteName='FavoriteScreen'>
-      <Stack.Screen name='FavoriteScreen' component={FavoriteScreen} />
-      <Stack.Screen name='MovieDetail' component={MovieDetail} />
+      <Stack.Screen 
+        name='FavoriteScreen' 
+        component={FavoriteScreen}
+        options={{ 
+          title: 'Favorite'
+         }}
+      />
+      <Stack.Screen 
+        name='MovieDetail' 
+        component={MovieDetail} 
+        options={{ 
+          title: 'Movie Detail'
+         }}
+      />
     </Stack.Navigator>
   )
 }

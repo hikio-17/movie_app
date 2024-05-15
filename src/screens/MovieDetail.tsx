@@ -146,7 +146,7 @@ const MovieDetail = ({ route }: any): JSX.Element => {
                   <Text
                     style={{ fontWeight: 'bold', fontSize: 16 }}
                   >Release Date</Text>
-                  <Text>{movie.release_date}</Text>
+                  <Text>{movie.release_date.toString()}</Text>
                 </View>
                 <View style={{ width: '50%' }}>
                   <Text

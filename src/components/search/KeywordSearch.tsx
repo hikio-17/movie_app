@@ -20,7 +20,6 @@ const KeywordSearch = (): JSX.Element => {
 
          const responseJson = await response.json();
          setMovies(responseJson.results);
-         setKeyword('');
       } catch (error) {
          console.log(error)
       }
